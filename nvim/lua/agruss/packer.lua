@@ -15,6 +15,8 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  use 'nvim-tree/nvim-web-devicons'
+
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.8',
 	  requires = { {'nvim-lua/plenary.nvim'} }
@@ -30,6 +32,23 @@ return require('packer').startup(function(use)
   use 'mbbill/undotree'
 
   use { 'akinsho/bufferline.nvim', tag = 'v4.9.1',  requires = 'nvim-tree/nvim-web-devicons' }
+
+  use ({ 'kylechui/nvim-surround', tag = 'v3.1.0', config = function()
+      require('nvim-surround').setup({}) end })
+
+  use { 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons'  } }
+
+  use { 'nvimdev/dashboard-nvim', event = 'VimEnter', 
+    config = function()
+        require('dashboard').setup {
+        }
+    end,
+    requires = { 'nvim-tree/nvim-web-devicons' }
+  }
+
+  use { 'lewis6991/gitsigns.nvim' }
+
+  use { 'tpope/vim-fugitive' }
 
   -- LSP setup
 

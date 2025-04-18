@@ -22,3 +22,7 @@ vim.opt.termguicolors = true
 vim.opt.updatetime = 50
 
 vim.g.mapleader = " "
+
+-- global mappings
+vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+vim.keymap.set('n', '<TAB>', '<cmd>bnext<CR>')

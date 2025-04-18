@@ -6,7 +6,9 @@ require('mason').setup({
             'roslyn',
 
             'lua-language-server',
-            'stylua'
+            'stylua',
+
+            'typescript-language-server' 
         }
     },
     registries = {
@@ -14,7 +16,7 @@ require('mason').setup({
         'github:Crashdummyy/mason-registry'
     }
 })
-require('mason-lspconfig').setup({
-    ensure_installed = {}
-})
+--require('mason-lspconfig').setup({
+--    ensure_installed = { }
+--})
 
