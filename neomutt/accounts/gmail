@@ -1,0 +1,21 @@
+set imap_user = "agruss90@googlemail.com"
+
+set imap_pass = `pass show neomutt/agruss90`
+set smtp_pass = `pass show neomutt/agruss90`
+
+set smtp_url = "smtps://agruss90@googlemail.com@smtp.gmail.com:465/"
+set smtp_authenticators = "gssapi:login"
+set ssl_starttls = true
+set ssl_force_tls = true
+
+set folder = imaps://imap.gmail.com:993
+set spoolfile = +INBOX
+set record = "+[Gmail]/Sent Mail"
+set postponed = "+[Gmail]/Drafts"
+
+set editor= "/usr/bin/nvim"
+
+mailboxes =INBOX =[Gmail]/Sent\ Mail =[Gmail]/Drafts =[Gmail]/Trash
+
+set realname = "Andreas Gruß"
+set from = "agruss90@googlemail.com"

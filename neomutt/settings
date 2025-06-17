@@ -1,0 +1,4 @@
+set sidebar_visible
+
+set sort = reverse-date
+set sort_aux = last-date-received
