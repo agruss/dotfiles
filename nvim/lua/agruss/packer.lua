@@ -64,6 +64,9 @@ return require('packer').startup(function(use)
 
   use 'seblyng/roslyn.nvim'
 
+  -- Helm detection
+  use 'towolf/vim-helm'
+
   if packer_bootstrap then
       require('packer').sync()
   end

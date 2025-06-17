@@ -8,7 +8,13 @@ require('mason').setup({
             'lua-language-server',
             'stylua',
 
-            'typescript-language-server' 
+            'typescript-language-server',
+
+            'dockerfile-language-server',
+            'docker-compose-language-service',
+
+            'helm-ls',
+            'yaml-language-server'
         }
     },
     registries = {

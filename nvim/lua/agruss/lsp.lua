@@ -20,16 +20,45 @@ require('roslyn').setup({
 
 -- typescript
 require('lspconfig').ts_ls.setup({
-    filetypes = { 'ts', 'typescript', 'typescript.tsx' },
+    filetypes = { 'ts', 'typescript', 'tsx' },
     on_attach = on_attach,
     cmd = { 'typescript-language-server', '--stdio' }
 })
 
 -- angular
 
--- docker
+-- docker & docker-compose
+require('lspconfig').dockerls.setup({
+    filetypes = { 'Dockerfile', 'dockerfile' },
+    cmd = { 'docker-langserver', '--stdio' },
+    on_attach = on_attach
+})
+
+require('lspconfig').docker_compose_language_service.setup({
+    filetypes = { 'yaml.docker-compose' },
+    cmd = { 'docker-compose-langserver', '--stdio' },
+    on_attach = on_attach
+})
+-- LSP is not attached - the following lines fixes it. Credits goes to https://vi.stackexchange.com/questions/43519/docker-compose-lsp-will-not-attach-to-buffer-nor-automatically-start
+function compose_fix()
+    local filename = vim.fn.expand('%:t')
+
+    if filename == 'docker-compose.yaml' then
+        vim.bo.filetype = 'yaml.docker-compose'
+    end
+end
+vim.cmd[[au BufRead * lua compose_fix()]]
 
 -- helm charts
+require('lspconfig').helm_ls.setup({
+    settings = {
+        ['helm-ls'] = {
+            yamlls = {
+                path = "yaml-language-server"
+            }
+        }
+    }
+})
 
 -- terraform
 
