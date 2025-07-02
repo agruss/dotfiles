@@ -50,6 +50,8 @@ return require('packer').startup(function(use)
 
   use { 'tpope/vim-fugitive' }
 
+  use { 'nvim-tree/nvim-tree.lua', requires = 'nvim-tree/nvim-web-devicons' }
+
   -- LSP setup
 
   use 'neovim/nvim-lspconfig'
@@ -66,6 +68,13 @@ return require('packer').startup(function(use)
 
   -- Helm detection
   use 'towolf/vim-helm'
+
+  use ({
+      'stevearc/conform.nvim',
+      config = function()
+          require('conform').setup()
+      end
+  })
 
   if packer_bootstrap then
       require('packer').sync()

@@ -23,6 +23,12 @@ vim.opt.updatetime = 50
 
 vim.g.mapleader = " "
 
+vim.diagnostic.config({
+    virtual_text = true
+})
+
 -- global mappings
 vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.keymap.set('n', '<TAB>', '<cmd>bnext<CR>')
+vim.keymap.set('n', '<leader>sD', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+vim.keymap.set('n', '<leader>dd', '<cmd>Telescope diagnostics<CR>', opts)

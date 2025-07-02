@@ -4,7 +4,6 @@ local on_attach = function(client, bufnr)
     -- Key mappings for LSP functionality
     local opts = { buffer = bufnr, noremap = true, silent = true }
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     vim.keymap.set('i', '<C-Space>', function() require('cmp').complete() end, opts)
 
 end,
