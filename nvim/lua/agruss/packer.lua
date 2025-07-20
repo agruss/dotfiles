@@ -43,6 +43,14 @@ return require('packer').startup(function(use)
 
   use { 'nvim-tree/nvim-tree.lua', requires = 'nvim-tree/nvim-web-devicons' }
 
+  use { 'MeanderingProgrammer/render-markdown.nvim',
+    after = { 'nvim-treesitter' },
+    config = function()
+        require('render-markdown').setup({
+            completions = { lsp = { enabled = true } }
+        })
+    end}
+
   -- LSP setup
 
   use 'neovim/nvim-lspconfig'
