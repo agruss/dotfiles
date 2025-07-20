@@ -29,7 +29,6 @@ return require('packer').startup(function(use)
 	  end
   })
   use('nvim-treesitter/nvim-treesitter', {run =  ':TSUpdate'})
-  use 'mbbill/undotree'
 
   use { 'akinsho/bufferline.nvim', tag = 'v4.9.1',  requires = 'nvim-tree/nvim-web-devicons' }
 
@@ -37,14 +36,6 @@ return require('packer').startup(function(use)
       require('nvim-surround').setup({}) end })
 
   use { 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons'  } }
-
-  use { 'nvimdev/dashboard-nvim', event = 'VimEnter', 
-    config = function()
-        require('dashboard').setup {
-        }
-    end,
-    requires = { 'nvim-tree/nvim-web-devicons' }
-  }
 
   use { 'lewis6991/gitsigns.nvim' }
 
@@ -75,6 +66,10 @@ return require('packer').startup(function(use)
           require('conform').setup()
       end
   })
+
+  -- debugging setup
+  use 'mfussenegger/nvim-dap'
+  use { 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' } }
 
   if packer_bootstrap then
       require('packer').sync()
