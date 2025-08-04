@@ -38,10 +38,7 @@ return require('packer').startup(function(use)
   use { 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons'  } }
 
   use { 'lewis6991/gitsigns.nvim' }
-
   use { 'tpope/vim-fugitive' }
-
-  use { 'nvim-tree/nvim-tree.lua', requires = 'nvim-tree/nvim-web-devicons' }
 
   use { 'MeanderingProgrammer/render-markdown.nvim',
     after = { 'nvim-treesitter' },
@@ -52,7 +49,6 @@ return require('packer').startup(function(use)
     end}
 
   -- LSP setup
-
   use 'neovim/nvim-lspconfig'
 
   use { 'williamboman/mason.nvim', 'williamboman/mason-lspconfig.nvim' }
