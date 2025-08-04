@@ -1,11 +1,9 @@
 local dap, dapui = require('dap'), require('dapui')
 
-require('dapui').setup({})
-
 dap.adapters.coreclr = {
     type = 'executable',
     command = '/usr/local/bin/netcoredbg/netcoredbg',
-    args = { '--interpreter=vscode'  }
+    args = { '--interpreter=vscode' }
 }
 
 dap.configurations.cs = {
@@ -13,9 +11,22 @@ dap.configurations.cs = {
         type = 'coreclr',
         name = 'launch - netcoredbg',
         request = 'launch',
+        justMyCode = false,
+        stopAtEntry = false,
         program = function()
-            return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+            return vim.fn.input('Path to dll: ', vim.fn.getcwd(), 'file')
         end,
+        args = {},
+        env = {
+            ASPNETCORE_ENVIRONMENT = 'Development',
+            ASPNETCORE_URLS = function()
+                return vim.fn.input('Url: ',  'http://localhost:')
+            end,
+        },
+        cwd = function()
+            return vim.fn.input('Workspace folder: ', vim.fn.getcwd(), 'file')
+        end,
+        console = 'integratedTerminal'
     },
 }
 
@@ -32,6 +43,8 @@ end
 dap.listeners.before.event_exited.dapui_config = function()
     dapui.close()
 end
+
+require('dapui').setup({})
 
 -- keybindings
 vim.keymap.set('n', '<F5>', '<Cmd>lua require"dap".continue()<CR>', opts)
