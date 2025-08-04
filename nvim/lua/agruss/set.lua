@@ -31,3 +31,4 @@ vim.diagnostic.config({
 vim.keymap.set('n', '<TAB>', '<cmd>bnext<CR>')
 vim.keymap.set('n', '<leader>sD', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.keymap.set('n', '<leader>dd', '<cmd>Telescope diagnostics<CR>', opts)
+vim.keymap.set('n', '<leader>.', vim.lsp.buf.code_action, opts)

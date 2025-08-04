@@ -19,7 +19,7 @@ require('roslyn').setup({
 
 -- typescript
 require('lspconfig').ts_ls.setup({
-    filetypes = { 'ts', 'typescript', 'tsx' },
+    filetypes = { 'ts', 'typescript', 'tsx', 'typescriptreact', 'typescript.tsx' },
     on_attach = on_attach,
     cmd = { 'typescript-language-server', '--stdio' }
 })
