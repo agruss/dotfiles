@@ -14,7 +14,11 @@ require('mason').setup({
             'docker-compose-language-service',
 
             'helm-ls',
-            'yaml-language-server'
+            'yaml-language-server',
+
+            'gopls',
+
+            'terraform-ls'
         }
     },
     registries = {

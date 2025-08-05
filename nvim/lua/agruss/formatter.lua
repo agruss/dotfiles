@@ -5,7 +5,8 @@ require('conform').setup({
     },
     formatter_by_ft = {
         typescript = { 'prettier' },
-        cs = { 'dotnet format' }
+        cs = { 'dotnet format' },
+        go = { 'gofmt -w .', 'goimports' },
     }
 })
 

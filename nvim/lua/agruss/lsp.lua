@@ -60,7 +60,8 @@ require('lspconfig').helm_ls.setup({
 })
 
 -- terraform
-
--- ansible
+vim.lsp.enable('terraformls')
 
 -- golang
+vim.lsp.enable('gopls')
+
