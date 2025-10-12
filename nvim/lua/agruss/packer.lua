@@ -48,6 +48,8 @@ return require('packer').startup(function(use)
         })
     end}
 
+  use { 'windwp/nvim-ts-autotag' }
+
   -- LSP setup
   use 'neovim/nvim-lspconfig'
 
@@ -63,13 +65,6 @@ return require('packer').startup(function(use)
 
   -- Helm detection
   use 'towolf/vim-helm'
-
-  use ({
-      'stevearc/conform.nvim',
-      config = function()
-          require('conform').setup()
-      end
-  })
 
   -- debugging setup
   use 'mfussenegger/nvim-dap'

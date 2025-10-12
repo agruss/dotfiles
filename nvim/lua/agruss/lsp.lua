@@ -5,39 +5,67 @@ local on_attach = function(client, bufnr)
     local opts = { buffer = bufnr, noremap = true, silent = true }
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('i', '<C-Space>', function() require('cmp').complete() end, opts)
+end
 
-end,
+local lsps = {
+    { 'roslyn',
+        root_dir = require('lspconfig.util').root_pattern('*.sln', '*.csproj'),
+        filetypes = { 'cs' },
+        autostart = true,
+        on_attach = on_attach,
+        capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), require('cmp_nvim_lsp').default_capabilities())
+    },
+    { 'ts_ls',
+        filetypes = { 'ts', 'typescript', 'tsx', 'typescriptreact', 'typescript.tsx' },
+        on_attach = on_attach,
+        cmd = { 'typescript-language-server', '--stdio' }
+    },
+    { 'dockerls',
+        filetypes = { 'Dockerfile', 'dockerfile' },
+        cmd = { 'docker-langserver', '--stdio' },
+        on_attach = on_attach
+    },
+    { 'docker_compose_language_service',
+        filetypes = { 'yaml.docker-compose' },
+        cmd = { 'docker-compose-langserver', '--stdio' },
+        on_attach = on_attach
+    },
+    { 'helm_ls',
+        settings = {
+            ['helm-ls'] = {
+                yamlls = {
+                    path = "yaml-language-server"
+                }
+            }
+        }
+    },
+    { 'terraformls',
+        on_attach = on_attach
+    },
+    { 'gopls',
+        on_attach = on_attach,
+        filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+        root_dir = require('lspconfig.util').root_pattern{ 'go.work', 'go.mod', '.git' },
+        settings = {
+            gopls = {
+                completeUnimported = true,
+                usePlaceholders = true,
+                analyses = {
+                    unusedparams = true
+                },
+            }
+        }
+    },
+}
 
--- csharp
-require('roslyn').setup({
-    root_dir = require('lspconfig.util').root_pattern('*.sln', '*.csproj'),
-    filetypes = { 'cs' },
-    autostart = true,
-    on_attach = on_attach,
-    capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), require('cmp_nvim_lsp').default_capabilities())
-})
+for _, lsp in pairs(lsps) do
+    local name, config = lsp[1], lsp[2]
+    vim.lsp.enable(name)
+    if config then
+        vim.lsp.config(name, config)
+    end
+end
 
--- typescript
-require('lspconfig').ts_ls.setup({
-    filetypes = { 'ts', 'typescript', 'tsx', 'typescriptreact', 'typescript.tsx' },
-    on_attach = on_attach,
-    cmd = { 'typescript-language-server', '--stdio' }
-})
-
--- angular
-
--- docker & docker-compose
-require('lspconfig').dockerls.setup({
-    filetypes = { 'Dockerfile', 'dockerfile' },
-    cmd = { 'docker-langserver', '--stdio' },
-    on_attach = on_attach
-})
-
-require('lspconfig').docker_compose_language_service.setup({
-    filetypes = { 'yaml.docker-compose' },
-    cmd = { 'docker-compose-langserver', '--stdio' },
-    on_attach = on_attach
-})
 -- LSP is not attached - the following lines fixes it. Credits goes to https://vi.stackexchange.com/questions/43519/docker-compose-lsp-will-not-attach-to-buffer-nor-automatically-start
 function compose_fix()
     local filename = vim.fn.expand('%:t')
@@ -48,20 +76,15 @@ function compose_fix()
 end
 vim.cmd[[au BufRead * lua compose_fix()]]
 
--- helm charts
-require('lspconfig').helm_ls.setup({
-    settings = {
-        ['helm-ls'] = {
-            yamlls = {
-                path = "yaml-language-server"
-            }
-        }
-    }
+-- Format on save
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("lsp", { clear = true }),
+    callback = function(args)
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = args.buf,
+            callback = function()
+                vim.lsp.buf.format { async = false, id = args.data.client_id }
+            end,
+        })
+    end
 })
-
--- terraform
-vim.lsp.enable('terraformls')
-
--- golang
-vim.lsp.enable('gopls')
-
