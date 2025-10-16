@@ -1,0 +1,15 @@
+[core]
+    editor=nvim
+
+[init]
+	defaultBranch = main
+[user]
+	name = Andreas Gruß
+    email = agruss90@googlemail.com
+[alias]
+    ddiff = -c diff.external=difft diff
+    dlog = -c diff.external=difft log -p --ext-diff
+[difftool]
+    prompt = false
+[diff]
+    tool = difftastic
