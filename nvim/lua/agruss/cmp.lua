@@ -4,7 +4,8 @@ cmp.setup({
 	snippet = {
 		-- REQUIRED - you must specify a snippet engine
 		expand = function(args)
-			vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+            require('luasnip').lsp_expand(args.body)
+			--vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
 	end,
 },
 	window = {
@@ -20,6 +21,7 @@ cmp.setup({
 	sources = {
 		{ name = 'nvim_lsp' },
 		{ name = 'path' },
+		{ name = 'luasnip' },
 	},
 })
 

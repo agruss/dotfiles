@@ -13,23 +13,45 @@ local lsps = {
         filetypes = { 'cs' },
         autostart = true,
         on_attach = on_attach,
-        capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), require('cmp_nvim_lsp').default_capabilities())
+        capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), require('cmp_nvim_lsp').default_capabilities()),
+        settings = {
+            ['csharp|completion'] = {
+                dotnet_show_completion_items_from_unimported_namespaces = true,
+                dotnet_show_name_completion_suggetions = true
+            },
+            ['csharp|formatting'] = {
+                dotnet_organize_imports_on_format = true
+            },
+            ['csharp|auto_insert'] = {
+                dotnet_enable_auto_insert = true
+            },
+            ['navigation'] = {
+                dotnet_navigate_to_decompiled_sources = true
+            },
+        },
     },
+
+    { 'angularls',
+    },
+
     { 'ts_ls',
         filetypes = { 'ts', 'typescript', 'tsx', 'typescriptreact', 'typescript.tsx' },
         on_attach = on_attach,
         cmd = { 'typescript-language-server', '--stdio' }
     },
+
     { 'dockerls',
         filetypes = { 'Dockerfile', 'dockerfile' },
         cmd = { 'docker-langserver', '--stdio' },
         on_attach = on_attach
     },
+
     { 'docker_compose_language_service',
         filetypes = { 'yaml.docker-compose' },
         cmd = { 'docker-compose-langserver', '--stdio' },
         on_attach = on_attach
     },
+
     { 'helm_ls',
         settings = {
             ['helm-ls'] = {
@@ -39,9 +61,11 @@ local lsps = {
             }
         }
     },
+
     { 'terraformls',
         on_attach = on_attach
     },
+
     { 'gopls',
         on_attach = on_attach,
         filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },

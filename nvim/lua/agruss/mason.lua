@@ -9,6 +9,7 @@ require('mason').setup({
             'stylua',
 
             'typescript-language-server',
+            'angular-language-server',
 
             'dockerfile-language-server',
             'docker-compose-language-service',

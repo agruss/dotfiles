@@ -1,0 +1,24 @@
+snippet class
+    ${2:public} class ${1}
+    {
+        ${0}
+    }
+
+snippet prop
+    ${1:public} ${2:string} ${3} { get; set; }
+
+snippet ctor
+    public ${1}()
+    {
+        ${0}
+    }
+
+snippet try
+    try
+    {
+        ${0:${VISUAL}}
+    }
+    catch(${1:Exception} e)
+    {
+        throw;
+    }

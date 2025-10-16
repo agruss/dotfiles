@@ -50,6 +50,9 @@ return require('packer').startup(function(use)
 
   use { 'windwp/nvim-ts-autotag' }
 
+  use { 'L3MON4D3/LuaSnip', tag = 'v2.*' }
+  use { 'saadparwaiz1/cmp_luasnip' }
+
   -- LSP setup
   use 'neovim/nvim-lspconfig'
 
