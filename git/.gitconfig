@@ -6,10 +6,23 @@
 [user]
 	name = Andreas Gruß
     email = agruss90@googlemail.com
+[push]
+    autoSetupRemote = true
+
 [alias]
     ddiff = -c diff.external=difft diff
     dlog = -c diff.external=difft log -p --ext-diff
+
+[difftool "difftastic"]
+    cmd = difft "$MERGED" "$LOCAL" "$REMOTE"
 [difftool]
     prompt = false
+[pager]
+    difftool = true
 [diff]
-    tool = difftastic
+    external = difft
+
+[merge]
+    tool = nvimdiff
+[mergetool "nvimdiff"]
+    layout = LOCAL,MERGED,REMOTE
