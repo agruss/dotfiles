@@ -52,6 +52,14 @@ return require('packer').startup(function(use)
 
   use { 'L3MON4D3/LuaSnip', tag = 'v2.*' }
   use { 'saadparwaiz1/cmp_luasnip' }
+  use { 'lukas-reineke/indent-blankline.nvim' }
+  use { 'folke/todo-comments.nvim', 
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = {
+        signs = true,
+        sign_priority = 8,
+    }
+  }
 
   -- LSP setup
   use 'neovim/nvim-lspconfig'
